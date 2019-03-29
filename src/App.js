@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Radium, { StyleRoot } from 'radium';
-import './App.css';
+import classes from './App.module.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -57,11 +56,7 @@ state = {
       color: 'white',
       border: '1px solid blue',
       padding: '10px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      cursor: 'pointer'
     };
 
     let persons = null;
@@ -86,25 +81,21 @@ state = {
       btnContent = "Hide Content";
     } else {
       style.backgroundColor = 'green';
-      style[':hover'] = {
-        backgroundColor: 'limegreen',
-        color: 'black'
-      }
       btnContent = "Show Content";
     }
-
-    let classes = [];
+    
+    let anotherClasses = [];
     
     if(this.state.persons.length <= 2){
-      classes.push('red');
+      anotherClasses.push(classes.red);
     }
     
     if( this.state.persons.length <= 1){
-      classes.push('bold');
+      anotherClasses.push(classes.bold);
     }
 
     if( this.state.persons.length === 0){
-      classes.push('green');
+      anotherClasses.push(classes.green);
     }
 
     let msg = "";
@@ -117,16 +108,14 @@ state = {
 
    
     return (
-      <StyleRoot>
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, This is Jarvis !! Hello Sir</h1>
-          <p className={classes.join(' ')}>{msg}</p>
+          <p className={anotherClasses.join(' ')}>{msg}</p>
           <button style={style} onClick={this.toggleNameHandler}>{btnContent}</button>
           {persons}
         </div>
-      </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+export default App;
