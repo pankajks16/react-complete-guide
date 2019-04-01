@@ -50,17 +50,9 @@ state = {
   };
   
   render() {
-
-    const style = {
-      backgroundColor: 'red',
-      color: 'white',
-      border: '1px solid blue',
-      padding: '10px',
-      cursor: 'pointer'
-    };
-
     let persons = null;
     let btnContent = null;
+    let btnClass = '';
 
     if(this.state.showPersons){
       persons = (
@@ -80,8 +72,8 @@ state = {
       )
       btnContent = "Hide Content";
     } else {
-      style.backgroundColor = 'green';
       btnContent = "Show Content";
+      btnClass = classes.Green;
     }
     
     let anotherClasses = [];
@@ -106,12 +98,11 @@ state = {
       msg = "Empty content";
     }
 
-   
     return (
         <div className={classes.App}>
           <h1>Hi, This is Jarvis !! Hello Sir</h1>
           <p className={anotherClasses.join(' ')}>{msg}</p>
-          <button style={style} onClick={this.toggleNameHandler}>{btnContent}</button>
+          <button className={btnClass} onClick={this.toggleNameHandler}>{btnContent}</button>
           {persons}
         </div>
     );

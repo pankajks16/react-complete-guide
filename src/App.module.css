@@ -14,6 +14,26 @@
   color: green;
 }
 
-button:hover {
-  background-color: pink;
+.App button {
+  background-color: red;
+  color: white;
+  border: 1px solid blue;
+  padding: 10px;
+  cursor: pointer
+}
+
+.App button:hover {
+  background-color: salmon;
+  color: black
+}
+
+
+.App button.Green {
+  background-color: green;
+  color: white;
+}
+
+.App button.Green:hover {
+  background-color: lightgreen;
+  color: black;
 }
