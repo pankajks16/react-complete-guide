@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
@@ -36,6 +37,7 @@ state = {
 
   toggleNameHandler = () => {
     // alert("The event that happened is: " + e.type)
+    console.log(this.state);
     const show = this.state.showPersons;
     this.setState({ showPersons: !show})
   };
@@ -48,61 +50,30 @@ state = {
     persons.splice(indexPerson, 1);
     this.setState({persons: persons})
   };
+
+  
   
   render() {
     let persons = null;
-    let btnContent = null;
-    let btnClass = '';
 
     if(this.state.showPersons){
       persons = (
-        <div>
-          {this.state.persons.map(
-            (person, index) => {
-              return <Person
-                name={person.name}
-                age={person.age}
-                click={this.deletePersonHandler.bind(this, index)}
-                key={person.id}
-                clicked={this.nameChangeHandler.bind(this, person.id)}
-              />
-            }
-          )}
-        </div>
+      <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangeHandler}
+      >
+      </Persons>
       )
-      btnContent = "Hide Content";
-    } else {
-      btnContent = "Show Content";
-      btnClass = classes.Green;
-    }
+    } 
     
-    let anotherClasses = [];
-    
-    if(this.state.persons.length <= 2){
-      anotherClasses.push(classes.red);
-    }
-    
-    if( this.state.persons.length <= 1){
-      anotherClasses.push(classes.bold);
-    }
-
-    if( this.state.persons.length === 0){
-      anotherClasses.push(classes.green);
-    }
-
-    let msg = "";
-
-    if(this.state.persons.length !== 0 ){
-      msg = "This is a sample paragraph";
-    } else {
-      msg = "Empty content";
-    }
-
     return (
         <div className={classes.App}>
-          <h1>Hi, This is Jarvis !! Hello Sir</h1>
-          <p className={anotherClasses.join(' ')}>{msg}</p>
-          <button className={btnClass} onClick={this.toggleNameHandler}>{btnContent}</button>
+          <Cockpit
+            persons = {this.state.persons}
+            toggler = {this.toggleNameHandler}
+            showPerson = {this.state.showPersons}
+          ></Cockpit>
           {persons}
         </div>
     );
