@@ -5,15 +5,15 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
-state = {
-  persons: [
-    { id: "abc1", name: "Pankaj", age: 26 },
-    { id: "abc2", name: "Chandler", age: 37 },
-    { id: "abc3", name: "Slattery", age: 31 }
-  ],
-  anotherState: "Some random value",
-  showPersons: true 
-};
+  state = {
+    persons: [
+      { id: "abc1", name: "Pankaj", age: 26 },
+      { id: "abc2", name: "Chandler", age: 37 },
+      { id: "abc3", name: "Slattery", age: 31 }
+    ],
+    anotherState: "Some random value",
+    showPersons: true 
+  };
 
   nameChangeHandler = (id, event) => {
     const personIndex = this.state.persons.findIndex((p) => {
@@ -51,8 +51,6 @@ state = {
     this.setState({persons: persons})
   };
 
-  
-  
   render() {
     let persons = null;
 
@@ -68,14 +66,14 @@ state = {
     } 
     
     return (
-        <div className={classes.App}>
-          <Cockpit
-            persons = {this.state.persons}
-            toggler = {this.toggleNameHandler}
-            showPerson = {this.state.showPersons}
-          ></Cockpit>
-          {persons}
-        </div>
+      <div className={classes.App}>
+        <Cockpit
+          persons = {this.state.persons}
+          toggler = {this.toggleNameHandler}
+          showPerson = {this.state.showPersons}
+        ></Cockpit>
+        {persons}
+      </div>
     );
   }
 }
