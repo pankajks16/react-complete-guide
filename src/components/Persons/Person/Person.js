@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './Person.module.css';
 
-const person = (props) => {
-  return (
-		<div className={classes.Person}>
-			<p onClick={props.click}>Hi ! I'm { props.name } and my age is: { props.age } </p>
-			<input type="text" onChange={props.clicked} value={ props.name } />
-		</div>  
-  );
-};
+class Person extends Component {
+	constructor(props) {
+    super(props);
+    console.log('[Person.js] -----> Inside the constructor() method', props);
+  }
 
-export default person;
+  componentDidMount() {
+    console.log('[Person.js] -----> Inside the componentDidMount() method');
+  }
+
+  componentWillMount() {
+    console.log('[Person.js] -----> Inside the componentWillMount() method');
+	}
+	
+	render(){
+		console.log('[Person.js] -----> Inside the render() method');
+		return (
+			<div className={classes.Person}>
+				<p onClick={this.props.click}>Hi ! I'm { this.props.name } and my age is: { this.props.age } </p>
+				<input type="text" onChange={this.props.clicked} value={ this.props.name } />
+			</div>  
+		)
+	}
+}
+
+export default Person;

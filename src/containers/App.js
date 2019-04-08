@@ -4,17 +4,31 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+  constructor(props){
+    super(props);
 
-  state = {
-    persons: [
-      { id: "abc1", name: "Pankaj", age: 26 },
-      { id: "abc2", name: "Chandler", age: 37 },
-      { id: "abc3", name: "Slattery", age: 31 }
-    ],
-    anotherState: "Some random value",
-    showPersons: true 
-  };
+    console.log('[App.js] ----- inside constructor() method', props);
+    this.state = {
+      persons: [
+        { id: "abc1", name: "Pankaj", age: 26 },
+        { id: "abc2", name: "Chandler", age: 37 },
+        { id: "abc3", name: "Slattery", age: 31 }
+      ],
+      anotherState: "Some random value",
+      showPersons: true 
+    };  
+  }
 
+  componentDidMount() {
+    console.log('[App.js] ----- inside componentDidMount() method');
+  }
+
+  componentWillMount() {
+    console.log('[App.js] ----- inside componentWillMount() method');
+  }
+
+  
+  
   nameChangeHandler = (id, event) => {
     const personIndex = this.state.persons.findIndex((p) => {
       return p.id === id
@@ -37,7 +51,7 @@ class App extends Component {
 
   toggleNameHandler = () => {
     // alert("The event that happened is: " + e.type)
-    console.log(this.state);
+    //console.log(this.state);
     const show = this.state.showPersons;
     this.setState({ showPersons: !show})
   };
@@ -52,6 +66,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('[App.js] ----- inside render() method');
     let persons = null;
 
     if(this.state.showPersons){

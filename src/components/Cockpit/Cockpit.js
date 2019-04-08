@@ -5,7 +5,7 @@ const cockpit = (props) => {
   let anotherClasses = [];
   let btnClass = '';
   let btnContent = null;
-  console.log(props);
+  //console.log(props);
   
   if(props.showPerson === true) {
     btnContent = 'Hide Content';
