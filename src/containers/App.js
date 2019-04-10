@@ -28,6 +28,20 @@ class App extends Component {
   }
 
   
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] ----> Inside the shouldComponentUpdate() method ', nextProps, nextState);
+    //return nextProps.persons !== this.props.persons
+    return nextState.persons !== this.state.persons || nextState.showPersons !== this.state.showPersons 
+    //return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] ----> Inside the componentWillUpdate () method ', nextProps, nextState);
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE App.js] ----> Inside the componentDidUpdate () method ');
+  }
   
   nameChangeHandler = (id, event) => {
     const personIndex = this.state.persons.findIndex((p) => {
@@ -58,7 +72,7 @@ class App extends Component {
 
   deletePersonHandler = (indexPerson, event) => {
     // const persons = this.state.person.slice();
-    //  alert(e.type);
+    // alert(e.type);
     // alert(event.target.id + " " + event.target.innerHTML);
     const persons = [...this.state.persons];
     persons.splice(indexPerson, 1);
@@ -82,6 +96,7 @@ class App extends Component {
     
     return (
       <div className={classes.App}>
+        <button onClick={() => { this.setState({ showPersons: true })}}>Show Persons</button>
         <Cockpit
           persons = {this.state.persons}
           toggler = {this.toggleNameHandler}
