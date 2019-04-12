@@ -14,7 +14,7 @@
     color: green;
   }
   
-  .Cockpit button {
+  .Button {
     background-color: red;
     color: white;
     border: 1px solid blue;
@@ -22,18 +22,18 @@
     cursor: pointer
   }
   
-  .Cockpit button:hover {
+  .Button:hover {
     background-color: salmon;
     color: black
   }
   
   
-  .Cockpit button.Green {
+  .Button.Green {
     background-color: green;
     color: white;
   }
   
-  .Cockpit button.Green:hover {
+  .Button.Green:hover {
     background-color: lightgreen;
     color: black;
   }
