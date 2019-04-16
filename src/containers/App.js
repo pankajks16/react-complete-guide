@@ -7,7 +7,7 @@ import withClass from '../hoc/withClass';
 import Aux from '../hoc/Auxss';
 
 class App extends PureComponent {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     console.log('[App.js] ----- inside constructor() method', props);
@@ -18,8 +18,9 @@ class App extends PureComponent {
         { id: "abc3", name: "Slattery", age: 31 }
       ],
       anotherState: "Some random value",
-      showPersons: true 
-    };  
+      showPersons: true,
+      toggleClicked: 0
+    };
   }
 
   componentDidMount() {
@@ -30,7 +31,7 @@ class App extends PureComponent {
     console.log('[App.js] ----- inside componentWillMount() method');
   }
 
-  
+
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log('[UPDATE App.js] ----> Inside the shouldComponentUpdate() method ', nextProps, nextState);
   //   //return nextProps.persons !== this.props.persons
@@ -45,12 +46,12 @@ class App extends PureComponent {
   componentDidUpdate() {
     console.log('[UPDATE App.js] ----> Inside the componentDidUpdate () method ');
   }
-  
+
   nameChangeHandler = (id, event) => {
     const personIndex = this.state.persons.findIndex((p) => {
       return p.id === id
     });
-    
+
     var person = {
       ...this.state.persons[personIndex]
     };
@@ -62,7 +63,7 @@ class App extends PureComponent {
     const persons = [...this.state.persons]
     persons[personIndex] = person;
 
-    this.setState({persons: persons})
+    this.setState({ persons: persons })
 
   };
 
@@ -70,7 +71,12 @@ class App extends PureComponent {
     // alert("The event that happened is: " + e.type)
     //console.log(this.state);
     const show = this.state.showPersons;
-    this.setState({ showPersons: !show})
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !show,
+        toggleClicked: prevState.toggleClicked + 1
+      };
+    });
   };
 
   deletePersonHandler = (indexPerson, event) => {
@@ -79,31 +85,31 @@ class App extends PureComponent {
     // alert(event.target.id + " " + event.target.innerHTML);
     const persons = [...this.state.persons];
     persons.splice(indexPerson, 1);
-    this.setState({persons: persons})
+    this.setState({ persons: persons })
   };
 
   render() {
     console.log('[App.js] ----- inside render() method');
     let persons = null;
 
-    if(this.state.showPersons){
+    if (this.state.showPersons) {
       persons = (
-      <Persons
-        persons={this.state.persons}
-        clicked={this.deletePersonHandler}
-        changed={this.nameChangeHandler}
-      >
-      </Persons>
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangeHandler}
+        >
+        </Persons>
       )
-    } 
-    
+    }
+
     return (
       <Aux>
-        <button className={classes.button} onClick={() => { this.setState({ showPersons: true })}}>Show Persons</button>
+        <button className={classes.button} onClick={() => { this.setState({ showPersons: true }) }}>Show Persons</button>
         <Cockpit
-          persons = {this.state.persons}
-          toggler = {this.toggleNameHandler}
-          showPerson = {this.state.showPersons}
+          persons={this.state.persons}
+          toggler={this.toggleNameHandler}
+          showPerson={this.state.showPersons}
         ></Cockpit>
         {persons}
       </Aux>
@@ -111,4 +117,4 @@ class App extends PureComponent {
   }
 }
 
-export default withClass(App,classes.App);
+export default withClass(App, classes.App);
